@@ -40,5 +40,14 @@
 
 # Diagrams
 
-## Mockup
+## Mockup Diagrams
 
+![loginpage](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/login_screen.png)
+![passwordrestpage](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/password_reset.png)
+![adminview](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/admin_view.png)
+![volunteerview](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/volunteer_view.png)
+![volunteerpage](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/volunteer_page.png)
+![inventoryadd](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/Inventory_add.png)
+![volunteerdetails](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/Inventory_details.png)
+![donationspage](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/donation_page.png)
+![emailreceipt](https://github.com/karthikdamuluri/FoodPantry-App/blob/master/mockups/Email_receipt.png)
