@@ -1,0 +1,102 @@
+<h1>Volunteers list</h1>
+
+<p>
+  {{link-to "New Volunteer" "volunteers.new" }}
+</p>
+
+{{#if model.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Vol number
+        </th>
+        <th>
+          Lname
+        </th>
+        <th>
+          Fname
+        </th>
+        <th>
+          Vol dob
+        </th>
+        <th>
+          Address
+        </th>
+        <th>
+          City
+        </th>
+        <th>
+          State
+        </th>
+        <th>
+          Zipcode
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Cell phone
+        </th>
+        <th>
+          Vol notes
+        </th>
+        <th colspan="3">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |volunteer|}}
+        <tr>
+          <td>
+            {{volunteer.volnumber}}
+          </td>
+          <td>
+            {{volunteer.lname}}
+          </td>
+          <td>
+            {{volunteer.fname}}
+          </td>
+          <td>
+            {{volunteer.voldob}}
+          </td>
+          <td>
+            {{volunteer.address}}
+          </td>
+          <td>
+            {{volunteer.city}}
+          </td>
+          <td>
+            {{volunteer.state}}
+          </td>
+          <td>
+            {{volunteer.zipcode}}
+          </td>
+          <td>
+            {{volunteer.email}}
+          </td>
+          <td>
+            {{volunteer.cellphone}}
+          </td>
+          <td>
+            {{volunteer.volnotes}}
+          </td>
+          <td>
+            {{link-to "Edit" "volunteers.edit" volunteer}}
+          </td>
+          <td>
+            {{link-to "Show" "volunteers.show" volunteer}}
+          </td>
+          <td>
+            <a href="#" {{action "remove" volunteer}}>Remove</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No Volunteers found
+  </p>
+{{/if}}
