@@ -1,0 +1,54 @@
+<h1>Inventories list</h1>
+
+<p>
+  {{link-to "New Inventory" "inventories.new" }}
+</p>
+
+{{#if model.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Itemcode
+        </th>
+        <th>
+          Itemname
+        </th>
+        <th>
+          Createdate
+        </th>
+        <th colspan="3">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |inventory|}}
+        <tr>
+          <td>
+            {{inventory.itemcode}}
+          </td>
+          <td>
+            {{inventory.itemname}}
+          </td>
+          <td>
+            {{inventory.createdate}}
+          </td>
+          <td>
+            {{link-to "Edit" "inventories.edit" inventory}}
+          </td>
+          <td>
+            {{link-to "Show" "inventories.show" inventory}}
+          </td>
+          <td>
+            <a href="#" {{action "remove" inventory}}>Remove</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No Inventories found
+  </p>
+{{/if}}

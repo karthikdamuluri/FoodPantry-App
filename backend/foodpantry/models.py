@@ -32,3 +32,29 @@ class Volunteer(models.Model):
 
     class JSONAPIMeta:
         resource_name = "volunteers"
+
+class Inventory(models.Model):
+    itemcode = models.IntegerField(unique=True,blank=False, null=False)
+    itemname =  models.CharField(unique=True,max_length=25)
+    createdate = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together= ('itemcode','itemname')
+
+class Donor(models.Model):
+    donorname = models.CharField(max_length=50)
+    joindate = models.DateField(default=timezone.now)
+    email = models.EmailField(max_length=100)
+    notes = models.CharField(max_length=50)
+
+    def __str__(self):
+        return str(self.donorname)
+
+class Donation(models.Model):
+    item = models.ForeignKey(Inventory,on_delete=models.CASCADE, default=1)
+    donor = models.ForeignKey(Donor,on_delete=models.CASCADE, default=1)
+    quantity = models.DecimalField(max_digits=10,decimal_places=1)
+    receiveddate = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.donor)

@@ -16,14 +16,17 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from rest_framework import routers
-from foodpantry.views import VolunteerViewSet
+#from rest_framework import routers
+#from foodpantry.views import VolunteerViewSet
+from foodpantry import urls as foodpantry_urls
+from foodpantry import controllers
 
-router = routers.DefaultRouter(trailing_slash=False)
-router.register("volunteers", VolunteerViewSet)
+#router = routers.DefaultRouter(trailing_slash=False)
+#router.register("volunteers", VolunteerViewSet)
 
 
 urlpatterns = [
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include(foodpantry_urls)),
     url(r'^admin/', admin.site.urls),
+    #url(r'^', controllers.home),
 ]

@@ -1,0 +1,60 @@
+<h1>Donors list</h1>
+
+<p>
+  {{link-to "New Donor" "donors.new" }}
+</p>
+
+{{#if model.length}}
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Donorname
+        </th>
+        <th>
+          Joindate
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Notes
+        </th>
+        <th colspan="3">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |donor|}}
+        <tr>
+          <td>
+            {{donor.donorname}}
+          </td>
+          <td>
+            {{donor.joindate}}
+          </td>
+          <td>
+            {{donor.email}}
+          </td>
+          <td>
+            {{donor.notes}}
+          </td>
+          <td>
+            {{link-to "Edit" "donors.edit" donor}}
+          </td>
+          <td>
+            {{link-to "Show" "donors.show" donor}}
+          </td>
+          <td>
+            <a href="#" {{action "remove" donor}}>Remove</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No Donors found
+  </p>
+{{/if}}
