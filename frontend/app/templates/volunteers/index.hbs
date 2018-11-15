@@ -1,24 +1,32 @@
 <h1>Volunteers list</h1>
 
 <p>
-  {{link-to "New Volunteer" "volunteers.new" }}
+  {{#link-to "volunteers.new" class="button"}}
+    Add Volunteer list
+  {{/link-to}}
 </p>
+<style>
+tr.bold {
+  font-size: 130%;
+  color: red;
+}
+</style>
 
 {{#if model.length}}
   <table>
     <thead>
-      <tr>
+      <tr class=bold>
         <th>
           Vol number
         </th>
         <th>
-          Lname
+          Last Name
         </th>
         <th>
-          Fname
+          First name
         </th>
         <th>
-          Vol dob
+          Volunteer dob
         </th>
         <th>
           Address
@@ -39,7 +47,7 @@
           Cell phone
         </th>
         <th>
-          Vol notes
+          Notes
         </th>
         <th colspan="3">
           Actions
@@ -89,7 +97,7 @@
             {{link-to "Show" "volunteers.show" volunteer}}
           </td>
           <td>
-            <a href="#" {{action "remove" volunteer}}>Remove</a>
+            <a href="#" {{action "remove" volunteer}}>Delete</a>
           </td>
         </tr>
       {{/each}}

@@ -9,7 +9,7 @@ class VolunteerSerializer(serializers.ModelSerializer):
 
 class InventorySerializer(serializers.ModelSerializer):
     class Meta:
-        model =Inventory
+        model = Inventory
         fields = ('itemcode', 'itemname', 'createdate')
 
 class DonorSerializer(serializers.ModelSerializer):

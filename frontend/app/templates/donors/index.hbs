@@ -3,11 +3,16 @@
 <p>
   {{link-to "New Donor" "donors.new" }}
 </p>
-
+<style>
+tr.bold {
+  font-size: 130%;
+  color: red;
+}
+</style>
 {{#if model.length}}
   <table>
     <thead>
-      <tr>
+      <tr class=bold>
         <th>
           Donorname
         </th>
@@ -47,7 +52,7 @@
             {{link-to "Show" "donors.show" donor}}
           </td>
           <td>
-            <a href="#" {{action "remove" donor}}>Remove</a>
+            <a href="#" {{action "remove" donor}}>Delete</a>
           </td>
         </tr>
       {{/each}}

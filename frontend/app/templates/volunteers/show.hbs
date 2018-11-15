@@ -1,26 +1,31 @@
+<p style="color:MediumSeaGreen;">
+  {{link-to "Volunteer list" "volunteers.index" class="button"}}
+</p>
+<style>
+span.note {
+  font-size: 120%;
+  color: red;
+}
+</style>
+<h1>Volunteer Information in the Organization</h1>
+
 <p>
-  {{link-to "Volunteer list" "volunteers.index" }}
+  <strong>Volunteer number:</strong>
+  <span class="note">{{model.volnumber}}</span>
 </p>
 
-<h1>Volunteer show</h1>
-
 <p>
-  <strong>Vol number:</strong>
-  <span>{{model.volnumber}}</span>
+  <strong>Last name:</strong>
+  <span class="note">{{model.lname}}</span>
 </p>
 
 <p>
-  <strong>Lname:</strong>
-  <span>{{model.lname}}</span>
-</p>
-
-<p>
-  <strong>Fname:</strong>
+  <strong>First name:</strong>
   <span>{{model.fname}}</span>
 </p>
 
 <p>
-  <strong>Vol dob:</strong>
+  <strong>Volunteer dob:</strong>
   <span>{{model.voldob}}</span>
 </p>
 
@@ -55,6 +60,6 @@
 </p>
 
 <p>
-  <strong>Vol notes:</strong>
+  <strong>Notes/Remarks:</strong>
   <span>{{model.volnotes}}</span>
 </p>

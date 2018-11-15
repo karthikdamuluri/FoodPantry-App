@@ -7,20 +7,20 @@
   </div>
   <div>
     <label>
-      Lname
+      Last Name
       {{input type="text" value=model.lname}}
     </label>
   </div>
   <div>
     <label>
-      Fname
+      First Name
       {{input type="text" value=model.fname}}
     </label>
   </div>
   <div>
     <label>
-      Vol dob
-      {{input type="text" value=model.voldob}}
+      Volunteer dob
+      {{pikaday-input value=model.voldob format="MM-DD-YYYY"}}
     </label>
   </div>
   <div>
@@ -61,7 +61,7 @@
   </div>
   <div>
     <label>
-      Vol notes
+      Notes/Remarks
       {{input type="text" value=model.volnotes}}
     </label>
   </div>

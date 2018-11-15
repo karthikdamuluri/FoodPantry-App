@@ -18,6 +18,42 @@ Router.map(function() {
       path: ':volunteer_id'
     });
   });
+
+  this.route('inventories', function() {
+    this.route('new');
+
+    this.route('edit', {
+      path: ':inventory_id/edit'
+    });
+
+    this.route('show', {
+      path: ':inventory_id'
+    });
+  });
+
+  this.route('donors', function() {
+    this.route('new');
+
+    this.route('edit', {
+      path: ':donor_id/edit'
+    });
+
+    this.route('show', {
+      path: ':donor_id'
+    });
+  });
+
+  this.route('donations', function() {
+    this.route('new');
+
+    this.route('edit', {
+      path: ':donation_id/edit'
+    });
+
+    this.route('show', {
+      path: ':donation_id'
+    });
+  });
 });
 
 export default Router;

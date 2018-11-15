@@ -3,11 +3,16 @@
 <p>
   {{link-to "New Inventory" "inventories.new" }}
 </p>
-
+<style>
+tr.bold {
+  font-size: 130%;
+  color: red;
+}
+</style>
 {{#if model.length}}
   <table>
     <thead>
-      <tr>
+      <tr class=bold>
         <th>
           Itemcode
         </th>
