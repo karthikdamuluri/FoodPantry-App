@@ -1,8 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  donorname: DS.hasMany('donation'),
-  joindate: DS.attr('date'),
+  donorname: DS.attr('string'),
+  joindate: DS.attr('date', { defaultValue: new Date }),
   email: DS.attr('string'),
   notes: DS.attr('string')
 });

@@ -4,7 +4,7 @@ export default DS.Model.extend({
   volnumber: DS.attr('number'),
   lname: DS.attr('string'),
   fname: DS.attr('string'),
-  voldob: DS.attr('date'),
+  voldob: DS.attr('date', { defaultValue: new Date }),
   address: DS.attr('string'),
   city: DS.attr('string'),
   state: DS.attr('string'),

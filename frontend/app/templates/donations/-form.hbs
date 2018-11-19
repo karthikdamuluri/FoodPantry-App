@@ -2,7 +2,7 @@
   <div>
     <label>
       Item
-      {{input type="text" value=model.item}}
+      {{input type="text" value=model.inventory.[itemname]}}
     </label>
   </div>
   <div>
@@ -20,7 +20,7 @@
   <div>
     <label>
       Receiveddate
-      {{pikaday-input value=model.receiveddate format="MM-DD-YYYY"}}
+      {{pikaday-input value=model.receiveddate onSelection=(action (mut model.receiveddate)) readonly="readonly" format="MM/DD/YYYY"}}
     </label>
   </div>
   <div>

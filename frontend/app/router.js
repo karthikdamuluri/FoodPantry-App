@@ -54,6 +54,8 @@ Router.map(function() {
       path: ':donation_id'
     });
   });
+  this.route('login');
+  this.route('home');
 });
 
 export default Router;

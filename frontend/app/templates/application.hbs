@@ -1,5 +1,27 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{!--welcome-page --}}
-{{!-- Feel free to remove this! --}}
 
-{{outlet}}
+<div class="container">
+  <div class="menu">
+    {{#link-to "index"}}
+      <h1>
+        <em>FoodPantry</em>
+      </h1>
+    {{/link-to}}
+    <div class="links">
+      {{#link-to "volunteers" class="menu-volunteers"}}
+        Volunteers
+      {{/link-to}}
+      {{#link-to "inventories" class="menu-inventories"}}
+        Inventories
+      {{/link-to}}
+      {{#link-to "donors" class="menu-donors"}}
+        Donors
+      {{/link-to}}
+      {{#link-to "donations" class="menu-donations"}}
+        Donations
+      {{/link-to}}
+    </div>
+  </div>
+  <div class="body">
+    {{outlet}}
+  </div>
+</div>

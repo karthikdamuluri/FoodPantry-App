@@ -8,7 +8,7 @@
   <div>
     <label>
       Joindate
-      {{pikaday-input value=model.joindate format="MM-DD-YYYY"}}
+      {{pikaday-input value=model.joindate onSelection=(action (mut model.joindate)) readonly="readonly" format="MM/DD/YYYY"}}
     </label>
   </div>
   <div>

@@ -11,10 +11,10 @@
       {{input type="text" value=model.itemname}}
     </label>
   </div>
-  <div>
+  <div class="col-sm-2">
     <label>
       Createdate
-      {{pikaday-input value=model.createdate format="MM-DD-YYYY"}}
+      {{pikaday-input value=model.cratedate onSelection=(action (mut model.createdate)) readonly="readonly" format="MM/DD/YYYY"}}
     </label>
   </div>
   <div>

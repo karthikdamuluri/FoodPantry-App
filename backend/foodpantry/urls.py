@@ -8,13 +8,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 #REST API routes
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'volunteers', controllers.VolunteerViewSet)
+router.register(r'inventories', controllers.InventoryViewSet)
+router.register(r'donors', controllers.DonorViewSet)
+router.register(r'donations', controllers.DonationViewSet)
 
 urlpatterns = [
-url(r'^volunteers/$', csrf_exempt(controllers.VolunteerViewSet.as_view({"get": "list"}))),
-url(r'^volunteers/(?P<pk>[0-9]+)/$', csrf_exempt(controllers.VolunteerViewSet.as_view({"get": "list"}))),
-url(r'^inventories/$', csrf_exempt(controllers.InventoryViewSet.as_view({"get": "list"}))),
-url(r'^inventories/(?P<pk>[0-9]+)/$', csrf_exempt(controllers.InventoryViewSet.as_view({"get": "list"}))),
-url(r'^donors/$', csrf_exempt(controllers.DonorViewSet.as_view({"get": "list"}))),
-url(r'^donations/$', csrf_exempt(controllers.DonationViewSet.as_view({"get": "list"}))),
+#url(r'^volunteers/$', csrf_exempt(controllers.VolunteerViewSet.as_view({"get": "list"}))),
+#url(r'^volunteers/(?P<pk>[0-9]+)/$', csrf_exempt(controllers.VolunteerViewSet.as_view({"get": "list"}))),
+#url(r'^inventories/$', csrf_exempt(controllers.InventoryViewSet.as_view({"get": "list"}))),
+#url(r'^inventories/(?P<pk>[0-9]+)/$', csrf_exempt(controllers.InventoryViewSet.as_view({"get": "list"}))),
+#url(r'^donors/$', csrf_exempt(controllers.DonorViewSet.as_view({"get": "list"}))),
+#url(r'^donations/$', csrf_exempt(controllers.DonationViewSet.as_view({"get": "list"}))),
 url(r'^', include(router.urls)),
 ]
