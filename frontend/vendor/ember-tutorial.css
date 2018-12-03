@@ -70,21 +70,23 @@ p {
  */
 
 .menu {
-  height: 4em;
+  height: 5em;
   background-color: #677ae4;
-  background-color: #05526A;
-  background-color: #e46855;
+  background-color: #ff4500;
+  background-color: #008000;
 }
 
 .menu h1 {
   padding: 7px 0 0 20px;
   color: #f9f9f9;
-  font-size: 2.1em;
+  font-size: 2.3em;
+  font-family: "Times New Roman", Times, serif;
+  font-style: "bold";
 }
 
 .menu h1 em {
   position: relative;
-  left: -12px;
+  left: -14px;
 }
 
 .menu a,
@@ -142,7 +144,7 @@ p {
 }
 
 .menu button:hover {
-  background-color: #111;
+  background-color: #f3f3f3;
   opacity: 1;
 }
 
@@ -370,7 +372,7 @@ p {
   background: url(../assets/images/foodpantry.jpg);
   background-size: contain;
   background-repeat: no-repeat;
-  height: 600px;
+  height: 500px;
   width: 400px;
   position: relative;
   top: -50px;

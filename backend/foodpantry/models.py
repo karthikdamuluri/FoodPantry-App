@@ -41,12 +41,12 @@ class Inventory(models.Model):
     class JSONAPIMeta:
         resource_name = "inventories"
 
-    class Meta:
-        unique_together= ('itemcode','itemname')
+    def __str__(self):
+        return str(self.itemname)
 
 class Donor(models.Model):
     donorname = models.CharField(max_length=50)
-    joindate = models.DateField(default=timezone.now)
+    joindate = models.DateTimeField(default=timezone.now)
     email = models.EmailField(max_length=100)
     notes = models.CharField(max_length=50)
 
@@ -57,13 +57,25 @@ class Donor(models.Model):
         return str(self.donorname)
 
 class Donation(models.Model):
-    item = models.ForeignKey(Inventory,on_delete=models.CASCADE, default=1)
-    donor = models.ForeignKey(Donor,on_delete=models.CASCADE, default=1)
+    item = models.ForeignKey(Inventory,on_delete=models.CASCADE, default=1, related_name='donations')
+    donor = models.ForeignKey(Donor,on_delete=models.CASCADE, default=1, null=True, related_name='donations')
     quantity = models.DecimalField(max_digits=10,decimal_places=1)
-    receiveddate = models.DateField(default=timezone.now)
+    receiveddate = models.DateTimeField(default=timezone.now)
 
     class JSONAPIMeta:
         resource_name = "donations"
 
     def __str__(self):
         return str(self.donor)
+
+class VolunteerAdmin(admin.ModelAdmin):
+    list_display = ('volnumber', 'fname')
+
+class InventoryAdmin(admin.ModelAdmin):
+    list_display = ('itemcode','itemname')
+
+class DonorAdmin(admin.ModelAdmin):
+    list_display = ('donorname','email')
+
+class DonationAdmin(admin.ModelAdmin):
+    list_display = ('item','donor')

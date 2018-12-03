@@ -1,8 +1,8 @@
 import Controller from '@ember/controller';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-	auth: inject.service('auth-manager'),
+	auth: service('auth-manager'),
 	actions:{
 		login: function(){
 			this.get('auth').login();

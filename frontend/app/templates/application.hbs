@@ -19,6 +19,14 @@
       {{#link-to "donations" class="menu-donations"}}
         Donations
       {{/link-to}}
+
+
+      {{#if auth.isLoggedIn}}
+          Logged in as: {{auth.username}} (<a {{action "logout"}}>Logout</a>)
+      {{else}}
+          {{#link-to 'login'}}Login{{/link-to}}
+      {{/if}}
+
     </div>
   </div>
   <div class="body">

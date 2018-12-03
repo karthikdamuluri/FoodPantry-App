@@ -2,14 +2,17 @@
   <div>
     <label>
       Item
-      {{input type="text" value=model.inventory.[itemname]}}
+      {{input type="text" value=model.item}}
     </label>
   </div>
   <div>
+
     <label>
       Donor
       {{input type="text" value=model.donor}}
+      <!--{{drop-down options=model.donor value=donor.donorname valueKey=valueKey textKey=textKey defaultText=defaultText}}-->
     </label>
+
   </div>
   <div>
     <label>

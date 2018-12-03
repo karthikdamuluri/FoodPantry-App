@@ -35,6 +35,34 @@ def home(request):
    return render_to_response('ember/index.html',
                {}, RequestContext(request))
 
+class Register(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request, *args, **kwargs):
+        # Login
+        username = request.POST.get('username') #you need to apply validators to these
+        #print ('username')
+        password = request.POST.get('password') #you need to apply validators to these
+        email = request.POST.get('email') #you need to apply validators to these
+        #gender = request.POST.get('gender') #you need to apply validators to these
+        #age = request.POST.get('age') #you need to apply validators to these
+        #educationlevel = request.POST.get('educationlevel') #you need to apply validators to these
+        #city = request.POST.get('city') #you need to apply validators to these
+        #state = request.POST.get('state') #you need to apply validators to these
+
+        #print request.POST.get('username')
+        if User.objects.filter(username=username).exists():
+            return Response({'username': 'Username is taken.', 'status': 'error'})
+        elif User.objects.filter(email=email).exists():
+            return Response({'email': 'Email is taken.', 'status': 'error'})
+
+        #especially before you pass them in here
+        newuser = User.objects.create_user(email=email, username=username, password=password)
+        newprofile = Profile(user=newuser, gender=gender, age=age, educationlevel=educationlevel, city=city, state=state)
+        newprofile.save()
+
+        return Response({'status': 'success', 'userid': newuser.id, 'profile': newprofile.id})
+
 class Session(APIView):
     permission_classes = (AllowAny,)
     def form_response(self, isauthenticated, userid, username, error=""):
@@ -106,6 +134,11 @@ class DonationViewSet(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
+
+def itemstotal(request,pk):
+    donations = Donation.objects.filter(item=pk)
+    sumitems = Donation.objects.filter(item=pk).aggregate(quantity__sum=Coalesce(Sum('quantity'),0.0))
+    return Response({'success': True}, status=status.HTTP_200_OK)
 
 
 

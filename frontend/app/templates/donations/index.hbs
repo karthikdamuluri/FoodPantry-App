@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <div class="row">
-  <h2 style="padding-left:15px">Donor Information</h2>
+  <h2 style="padding-left:15px">Donation Information</h2>
 
 </div>
   <style>
@@ -9,6 +9,7 @@
          background-color:beige;
       }
   </style>
+
 <div>
   {{#if model.length}}
     <table  class="table table-striped table-bordered table-hover">
@@ -60,12 +61,15 @@
       </tbody>
     </table>
 
-      <div class="row">
-        {{link-to "New Donation" "donations.new" class="button"}}
-      </div>
+
   {{else}}
     <p id="blankslate">
       No Donations found
     </p>
   {{/if}}
+</div>
+<div class="row">
+      {{#link-to "donations.new" class="button"}}
+      Add Donation
+      {{/link-to}}
 </div>

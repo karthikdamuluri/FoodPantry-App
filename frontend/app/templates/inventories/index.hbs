@@ -18,8 +18,8 @@
         <tr class="bg-info">
           <th>Itemcode</th>
           <th>Itemname</th>
-          <th>Createdate</th>
-          <th colspan="3">
+
+          <th colspan="4">
             Actions
           </th>
         </tr>
@@ -33,9 +33,7 @@
             <td>
               {{inventory.itemname}}
             </td>
-            <td>
-              {{inventory.createdate}}
-            </td>
+
             <td>
               {{link-to "Edit" "inventories.edit" inventory}}
             </td>
@@ -44,6 +42,11 @@
             </td>
             <td>
               <a href="#" {{action "remove" inventory}}>Remove</a>
+            </td>
+            <td>
+              {{#link-to "itemstotal" class="btn btn-primary"}}
+              Total
+              {{/link-to}}
             </td>
           </tr>
         {{/each}}

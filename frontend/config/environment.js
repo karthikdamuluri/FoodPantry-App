@@ -2,9 +2,9 @@
 
 module.exports = function(environment) {
   var ENV = {
-    host: 'https://somepantry.com',
+    // host: 'https://somepantry.com',
     modulePrefix: 'frontend',
-    environment,
+    // environment: environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
