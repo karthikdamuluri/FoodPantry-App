@@ -41,12 +41,11 @@
               {{link-to "Show" "inventories.show" inventory}}
             </td>
             <td>
-              <a href="#" {{action "remove" inventory}}>Remove</a>
+              <a href="#" {{action "remove" inventory}}>Delete</a>
             </td>
             <td>
-              {{#link-to "itemstotal" class="btn btn-primary"}}
-              Total
-              {{/link-to}}
+              {{link-to "itemstotal" "inventories.itemstotal" inventory class="btn btn-primary"}}
+
             </td>
           </tr>
         {{/each}}

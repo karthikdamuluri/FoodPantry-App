@@ -6,27 +6,29 @@
         <em>FoodPantry</em>
       </h1>
     {{/link-to}}
+
     <div class="links">
-      {{#link-to "volunteers" class="menu-volunteers"}}
-        Volunteers
-      {{/link-to}}
-      {{#link-to "inventories" class="menu-inventories"}}
-        Inventories
-      {{/link-to}}
-      {{#link-to "donors" class="menu-donors"}}
-        Donors
-      {{/link-to}}
-      {{#link-to "donations" class="menu-donations"}}
-        Donations
-      {{/link-to}}
-
-
       {{#if auth.isLoggedIn}}
-          Logged in as: {{auth.username}} (<a {{action "logout"}}>Logout</a>)
-      {{else}}
-          {{#link-to 'login'}}Login{{/link-to}}
+        {{#link-to "volunteers" class="menu-volunteers"}}
+          Volunteers
+        {{/link-to}}
+        {{#link-to "inventories" class="menu-inventories"}}
+          Inventories
+        {{/link-to}}
+        {{#link-to "donors" class="menu-donors"}}
+          Donors
+        {{/link-to}}
+        {{#link-to "donations" class="menu-donations"}}
+          Donations
+        {{/link-to}}
       {{/if}}
-
+      <ul class="nav navbar-nav navbar-right">
+        {{#if auth.isLoggedIn}}
+            Logged in as: {{auth.username}} (<a {{action "logout"}}>LOGOUT</a>)
+          {{else}}
+            {{#link-to 'login'}}LOGIN{{/link-to}}
+        {{/if}}
+      </ul>
     </div>
   </div>
   <div class="body">

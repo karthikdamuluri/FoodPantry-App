@@ -40,15 +40,20 @@
             <td>
               <a href="#" {{action "remove" donor}}>Delete</a>
             </td>
+            <td>
+              {{link-to "trackdonations" "donors.trackdonations" donor class="btn btn-primary"}}
+
+            </td>
           </tr>
         {{/each}}
       </tbody>
     </table>
 
-      <div class="row">
-          {{link-to "Add Donor" "donors.new" class="button"}}
-      </div>
-
+        <div class="row">
+            {{#link-to "donors.new" class="button"}}
+              Add Donor
+            {{/link-to}}
+        </div>
   {{else}}
     <p id="blankslate">
       No Donors found

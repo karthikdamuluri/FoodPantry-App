@@ -17,5 +17,4 @@ export default Mixin.create({
       record.rollbackAttributes();
     },
   },
-
 });

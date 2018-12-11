@@ -106,7 +106,7 @@ export default Service.extend({
 
 		//check to see if the user is logged into the API
 		$.get(ENV.host + '/api/session', function(response){
-			if(response.isauthenticated){
+			if(response.data.isauthenticated){
 				//success
 			//	console.log('The user: \''+response.username+'\' is currently logged in.');
 				auth.set('username', response.username);

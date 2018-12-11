@@ -3,10 +3,12 @@ import SaveModelMixin from 'frontend/mixins/donations/save-model-mixin';
 import RSVP from 'rsvp';
 
 export default Route.extend(SaveModelMixin, {
-  model: function() {
+  model(){
     return RSVP.hash({
-      donations: this.store.createRecord('donation'),
-      inventories: this.store.findAll('inventory')
-    });
+      inventories: this.store.findAll('inventory'),
+    //  inventories: this.store.findRecord('inventory', params.itemname),
+      donors: this.store.findAll('donor'),
+      donation: this.store.createRecord('donation'),
+    })
   }
 });

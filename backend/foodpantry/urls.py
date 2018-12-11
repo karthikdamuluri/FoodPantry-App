@@ -12,10 +12,12 @@ router.register(r'volunteers', controllers.VolunteerViewSet)
 router.register(r'inventories', controllers.InventoryViewSet)
 router.register(r'donors', controllers.DonorViewSet)
 router.register(r'donations', controllers.DonationViewSet)
+router.register(r'inventories1', controllers.Inventory1ViewSet)
+router.register(r'donors1', controllers.Donor1ViewSet)
 
 urlpatterns = [
     url(r'^session', csrf_exempt(controllers.Session.as_view())),
-    url(r'^register', csrf_exempt(controllers.Register.as_view())),
+    # url(r'^register', csrf_exempt(controllers.Register.as_view())),
     url(r'^', include(router.urls)),
-    url(r'^inventories/(?P<pk>\d+)/itemstotal/$', controllers.itemstotal, name='itemtotal'),
+    #url(r'^inventories/(?P<pk>\d+)/itemstotal/$', controllers.itemstotal, name='itemtotal'),
 ]

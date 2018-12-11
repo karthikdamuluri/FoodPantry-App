@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <div class="jumbo"> -->
+  <!-- <div class="right tomster"></div> -->
+  <h2>Welcome!</h2>
+  <p>We are here to help the people who are in need. We maintain the record of item in the pantry. And maintain the record of donation items. </p>
+
+  <div>
+
+        <p><img src="{{constants.rootURL}}img/foodpantry.jpg" width="40%" height="15%" display="block" margin-left="auto" margin-right="auto"> </p>
+  </div>
+{{!-- </div> -->
+<h2>Welcome!</h2>
+<p>We are here to help the people who are in need. We maintain the record of item in the pantry. And maintain the record of donation items. </p>
+{{#if auth.isLoggedIn}} --}}
+<p> Thankyou for your generous help</p>
+  <div class="content container">
+      <div class="row">
+                    <div class="col-md-12">
+                        <div class="links">
+                            <!-- Example row of columns -->
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+
+                                        <div class="caption">
+                                            <h2>Inventory</h2>
+                                              {{#link-to 'inventories1'}}
+                                                <p><img src="{{constants.rootURL}}img/foodinventory.png" width="100%" height="100%">View details &raquo;</p>
+                                                {{/link-to}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+
+                                        <div class="caption">
+                                            <h2>Donor</h2>
+                                              {{#link-to 'donors1'}}
+                                                <p><img src="{{constants.rootURL}}img/donorimage.jpg" width="100%" height="100%">View details &raquo;</p>
+                                                {{/link-to}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+
+                                        <div class="caption">
+                                            <h2>Donations</h2>
+                                              {{#link-to 'donations'}}
+                                                <p><img src="{{constants.rootURL}}img/donationbox.jpg" width="100%">View details &raquo;</p>
+                                                {{/link-to}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                          </div>
+                      </div>
+
+                  </div>
+
+  </div>
+{{!-- {{/if}} --}}

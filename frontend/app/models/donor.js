@@ -5,6 +5,7 @@ export default DS.Model.extend({
   joindate: DS.attr('date', { defaultValue: new Date }),
   email: DS.attr('string'),
   notes: DS.attr('string'),
-  donations: DS.hasMany('donation')
+  donations: DS.hasMany('donation', {async:true})
+
   //donorname: DS.belongsTo('donation')
 });

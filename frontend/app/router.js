@@ -29,9 +29,41 @@ Router.map(function() {
     this.route('show', {
       path: ':inventory_id'
     });
+
+    this.route('itemstotal', {
+      path:':inventory_id/itemstotal'
+    });
+  });
+
+  this.route('inventories1', function() {
+    this.route('new');
+
+    this.route('edit', {
+      path: ':inventory_id/edit'
+    });
+
+    this.route('show', {
+      path: ':inventory_id'
+    });
   });
 
   this.route('donors', function() {
+    this.route('new');
+
+    this.route('edit', {
+      path: ':donor_id/edit'
+    });
+
+    this.route('show', {
+      path: ':donor_id'
+    });
+
+    this.route('trackdonations', {
+      path: ':donor_id/trackdonations'
+    });
+  });
+
+  this.route('donors1', function() {
     this.route('new');
 
     this.route('edit', {
@@ -56,7 +88,9 @@ Router.map(function() {
   });
   this.route('login');
   this.route('home');
-  this.route('itemstotal');
+  // this.route('itemstotal');
+  this.route('home1');
+  // this.route('trackdonations');
 });
 
 export default Router;

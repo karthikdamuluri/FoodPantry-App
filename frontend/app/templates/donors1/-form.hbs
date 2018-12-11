@@ -1,0 +1,29 @@
+<form {{action "save" on="submit"}}>
+  <div>
+    <label>
+      Donorname
+      {{input type="text" value=model.donorname}}
+    </label>
+  </div>
+  <div>
+    <label>
+      Joindate
+      {{pikaday-input value=model.joindate onSelection=(action (mut model.joindate)) readonly="readonly" format="MM/DD/YYYY"}}
+    </label>
+  </div>
+  <div>
+    <label>
+      Email
+      {{input type="text" value=model.email}}
+    </label>
+  </div>
+  <div>
+    <label>
+      Notes
+      {{input type="text" value=model.notes}}
+    </label>
+  </div>
+  <div>
+    <input type="submit" value="Save">
+  </div>
+</form>

@@ -20,7 +20,7 @@
   <div>
     <label>
       Volunteer dob
-      {{pikaday-input value=model.voldob onSelection=(action (mut model.voldob)) readonly="readonly" format="MM/DD/YYYY"}}
+      {{pikaday-input value=model.voldob onSelection=(action (mut model.voldob)) readonly="readonly" format="MM/DD/YYYY" yearRange="1950,currentYear"}}
     </label>
   </div>
   <div>

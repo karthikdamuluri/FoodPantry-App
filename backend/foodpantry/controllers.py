@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
+import foodpantry.serializers as foodpantry
 
 #create your views here
 from rest_framework.views import APIView
@@ -11,57 +12,66 @@ from django.shortcuts import render_to_response
 from django.db import models
 from django.contrib.auth.models import *
 from django.contrib.auth import *
-
+from django.db.models.functions import Coalesce
+from django.db.models import Sum, Value as V
 
 #rest API
 from rest_framework import serializers
 from rest_framework.response import Response
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from rest_framework.authentication import *
 from rest_framework.permissions import *
 from rest_framework.decorators import *
-from rest_framework.authentication import *
+from django.core.exceptions import ValidationError
+#from rest_framework.permissions import IsAuthenticated
 
 from django.http import Http404
-from rest_framework.permissions import AllowAny
+from django.shortcuts import get_object_or_404, render
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 import json, datetime, pytz
 import requests
 
-def home(request):
-   """
-   Send requests to / to the ember.js clientside app
-   """
-   return render_to_response('ember/index.html',
-               {}, RequestContext(request))
+# def home(request):
+#    """
+#    Send requests to / to the ember.js clientside app
+#    """
+#    return render_to_response('ember/index.html',
+#                {}, RequestContext(request))
 
-class Register(APIView):
-    permission_classes = (AllowAny,)
+def admin_or_401(request):
+    if not (request.user.is_staff or request.user.is_superuser):
+        return Response({'success': False},status=status.HTTP_401_UNAUTHORIZED)
 
-    def post(self, request, *args, **kwargs):
-        # Login
-        username = request.POST.get('username') #you need to apply validators to these
-        #print ('username')
-        password = request.POST.get('password') #you need to apply validators to these
-        email = request.POST.get('email') #you need to apply validators to these
-        #gender = request.POST.get('gender') #you need to apply validators to these
-        #age = request.POST.get('age') #you need to apply validators to these
-        #educationlevel = request.POST.get('educationlevel') #you need to apply validators to these
-        #city = request.POST.get('city') #you need to apply validators to these
-        #state = request.POST.get('state') #you need to apply validators to these
-
-        #print request.POST.get('username')
-        if User.objects.filter(username=username).exists():
-            return Response({'username': 'Username is taken.', 'status': 'error'})
-        elif User.objects.filter(email=email).exists():
-            return Response({'email': 'Email is taken.', 'status': 'error'})
-
-        #especially before you pass them in here
-        newuser = User.objects.create_user(email=email, username=username, password=password)
-        newprofile = Profile(user=newuser, gender=gender, age=age, educationlevel=educationlevel, city=city, state=state)
-        newprofile.save()
-
-        return Response({'status': 'success', 'userid': newuser.id, 'profile': newprofile.id})
+# class Register(APIView):
+#     permission_classes = (AllowAny,)
+#
+#     def post(self, request, *args, **kwargs):
+#         # Login
+#         username = request.POST.get('username') #you need to apply validators to these
+#         #print ('username')
+#         password = request.POST.get('password') #you need to apply validators to these
+#         email = request.POST.get('email') #you need to apply validators to these
+#         #gender = request.POST.get('gender') #you need to apply validators to these
+#         #age = request.POST.get('age') #you need to apply validators to these
+#         #educationlevel = request.POST.get('educationlevel') #you need to apply validators to these
+#         #city = request.POST.get('city') #you need to apply validators to these
+#         #state = request.POST.get('state') #you need to apply validators to these
+#
+#         #print request.POST.get('username')
+#         if User.objects.filter(username=username).exists():
+#             return Response({'username': 'Username is taken.', 'status': 'error'})
+#         elif User.objects.filter(email=email).exists():
+#             return Response({'email': 'Email is taken.', 'status': 'error'})
+#
+#         #especially before you pass them in here
+#         newuser = User.objects.create_user(email=email, username=username, password=password)
+#         newprofile = Profile(user=newuser, gender=gender, age=age, educationlevel=educationlevel, city=city, state=state)
+#         newprofile.save()
+#
+#         return Response({'status': 'success', 'userid': newuser.id, 'profile': newprofile.id})
 
 class Session(APIView):
     permission_classes = (AllowAny,)
@@ -100,24 +110,81 @@ class Session(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 #volunteer viewset
+#@login_required
 class VolunteerViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows volunteer members to be CRUDed.
     """
-    permission_classes = (AllowAny,)
+
     queryset = Volunteer.objects.all()
     serializer_class = VolunteerSerializer
+    permission_classes = (AllowAny,)
+
+    def create(self, request):
+        admin_or_401(request)
+
+        serializer = foodpantry.VolunteerSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        admin_or_401(request)
+
+        serializer = foodpantry.VolunteerSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
 
 #viewset for inventories
 class InventoryViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Inventories to be CURDed
     """
-    permission_classes = (AllowAny,)
+
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
+    permission_classes = (AllowAny,)
 
-#viewset for Donors
+    def create(self, request):
+        admin_or_401(request)
+
+        serializer = foodpantry.InventorySerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        admin_or_401(request)
+
+        serializer = foodpantry.InventorySerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+class Inventory1ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Inventories added by volunteers to be CURDed
+    """
+
+    queryset = Inventory.objects.all()
+    serializer_class = Inventory1Serializer
+    permission_classes = (IsAuthenticated,)
+
+
+#viewset for Donorss
 class DonorViewSet(viewsets.ModelViewSet):
     """
     API endpoint for the donor details
@@ -125,6 +192,37 @@ class DonorViewSet(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
     queryset = Donor.objects.all()
     serializer_class = DonorSerializer
+
+    def create(self, request):
+        admin_or_401(request)
+
+        serializer = foodpantry.DonorSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        admin_or_401(request)
+
+        serializer = foodpantry.DonorSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+class Donor1ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for the donor details for volunteer
+    """
+    permission_classes = (AllowAny,)
+    queryset = Donor.objects.all()
+    serializer_class = Donor1Serializer
+
 
 #viewset for Donations
 class DonationViewSet(viewsets.ModelViewSet):
@@ -134,11 +232,41 @@ class DonationViewSet(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
+    filter_fields = ('id', 'item', 'quantity')
 
-def itemstotal(request,pk):
-    donations = Donation.objects.filter(item=pk)
-    sumitems = Donation.objects.filter(item=pk).aggregate(quantity__sum=Coalesce(Sum('quantity'),0.0))
-    return Response({'success': True}, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        admin_or_401(request)
+
+        serializer = foodpantry.DonationSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        admin_or_401(request)
+
+        serializer = foodpantry.DonationSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def itemstotal(self, request, pk=None):
+       donations = Donation.objects.filter(item=pk)
+       sumitems = Donation.objects.filter(item=pk).aggregate(quantity__sum=Coalesce(Sum('quantity'),0.0))
+       return Response({'success': True, 'sumitems': sumitems}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['get'])
+    def trackdonations2(self, request, pk):
+        donations = Donation.objects.filter (donor=pk)
+        return Response({'success': True, 'donations': donations, 'donorpk': pk}, status=status.HTTP_200_OK)
 
 
 
