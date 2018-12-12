@@ -5,9 +5,10 @@ import RSVP from 'rsvp';
 export default Route.extend(SaveModelMixin, {
   model: function() {
     return RSVP.hash({
-      donation: this.store.createRecord('donation'),
+
       inventories: this.store.findAll('inventory'),
       donors: this.store.findAll('donor'),
-    })
+      donation: this.store.createRecord('donation'),
+    });
   }
 });

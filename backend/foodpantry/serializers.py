@@ -10,7 +10,7 @@ class VolunteerSerializer(serializers.ModelSerializer):
 class DonationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation
-        fields ='__all__'
+        fields = ('id', 'item', 'donor', 'quantity', 'receiveddate')
 
 class InventorySerializer(serializers.ModelSerializer):
     donations = DonationSerializer(read_only=True, many=True)

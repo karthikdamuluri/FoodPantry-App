@@ -9,6 +9,6 @@ export default Controller.extend({
 		},
 		logout: function(){
 			this.get('auth').logout();
-		}
+		},
 	}
 });

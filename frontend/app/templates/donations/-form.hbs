@@ -30,13 +30,13 @@
   <div>
     <label>
       Quantity
-      {{input type="text" value=model.quantity}}
+      {{input type="text" value=model.donation.quantity}}
     </label>
   </div>
   <div>
     <label>
       Receiveddate
-      {{pikaday-input value=model.receiveddate onSelection=(action (mut model.receiveddate)) readonly="readonly" format="MM/DD/YYYY"}}
+      {{pikaday-input value=model.donation.receiveddate onSelection=(action (mut model.donation.receiveddate)) readonly="readonly" format="MM/DD/YYYY"}}
     </label>
   </div>
   <div>

@@ -33,6 +33,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 import json, datetime, pytz
 import requests
+import bleach
 
 # def home(request):
 #    """
@@ -118,29 +119,7 @@ class VolunteerViewSet(viewsets.ModelViewSet):
 
     queryset = Volunteer.objects.all()
     serializer_class = VolunteerSerializer
-    permission_classes = (AllowAny,)
-
-    def create(self, request):
-        admin_or_401(request)
-
-        serializer = foodpantry.VolunteerSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
-
-    def update(self, request, pk=None):
-        admin_or_401(request)
-
-        serializer = foodpantry.VolunteerSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
+    permission_classes = (IsAuthenticated,)
 
 #viewset for inventories
 class InventoryViewSet(viewsets.ModelViewSet):
@@ -152,27 +131,6 @@ class InventoryViewSet(viewsets.ModelViewSet):
     serializer_class = InventorySerializer
     permission_classes = (AllowAny,)
 
-    def create(self, request):
-        admin_or_401(request)
-
-        serializer = foodpantry.InventorySerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
-
-    def update(self, request, pk=None):
-        admin_or_401(request)
-
-        serializer = foodpantry.InventorySerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
 
 class Inventory1ViewSet(viewsets.ModelViewSet):
     """
@@ -193,27 +151,6 @@ class DonorViewSet(viewsets.ModelViewSet):
     queryset = Donor.objects.all()
     serializer_class = DonorSerializer
 
-    def create(self, request):
-        admin_or_401(request)
-
-        serializer = foodpantry.DonorSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
-
-    def update(self, request, pk=None):
-        admin_or_401(request)
-
-        serializer = foodpantry.DonorSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
 
 class Donor1ViewSet(viewsets.ModelViewSet):
     """
@@ -233,29 +170,6 @@ class DonationViewSet(viewsets.ModelViewSet):
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
     filter_fields = ('id', 'item', 'quantity')
-
-
-    def create(self, request):
-        admin_or_401(request)
-
-        serializer = foodpantry.DonationSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
-
-    def update(self, request, pk=None):
-        admin_or_401(request)
-
-        serializer = foodpantry.DonationSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save()
-
-        return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def itemstotal(self, request, pk=None):
