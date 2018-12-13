@@ -1,3 +1,4 @@
+{{#if auth.isLoggedIn}}
 <form {{action "save" on="submit"}}>
   <div>
     <label>
@@ -21,3 +22,4 @@
     <input type="submit" value="Save">
   </div>
 </form>
+{{/if}}

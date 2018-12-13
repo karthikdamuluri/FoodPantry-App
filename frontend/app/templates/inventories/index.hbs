@@ -10,7 +10,7 @@
          background-color:beige;
       }
   </style>
-
+{{#if auth.isLoggedIn}}
 <div>
   {{#if model.length}}
     <table class="table table-striped table-bordered table-hover">
@@ -51,16 +51,17 @@
         {{/each}}
       </tbody>
     </table>
-      <div class="row">
-        {{#link-to "inventories.new" class="button"}}
-          Add Inventories
-        {{/link-to}}
-      </div>
 
   {{else}}
     <p id="blankslate">
       No Inventories found
     </p>
   {{/if}}
+  <div class="row">
+      {{#link-to "inventories.new" class="button"}}
+        Add Inventories
+      {{/link-to}}
+  </div>
 
 </div>
+{{/if}}

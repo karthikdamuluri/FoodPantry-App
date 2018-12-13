@@ -2,7 +2,7 @@ import Service from '@ember/service';
 //import Ember from 'ember';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
-import ENV from 'frontend/config/environment';
+// import ENV from 'frontend/config/environment';
 
 export default Service.extend({
 	store: service('store'),
@@ -32,7 +32,7 @@ export default Service.extend({
 		var auth = this;
 
 		//make api request
-		$.post(ENV.host + '/api/session', data, function(response){
+		$.post('/api/session', data, function(response){
 
 			if(response.data.isauthenticated){
 				//success
@@ -55,7 +55,7 @@ export default Service.extend({
 
 				auth.get('routing').transitionTo('home');
 
-        //console.log('Login POST Request to /api/session/ was successful.');
+        console.log('Login POST Request to /api/session/ was successful.');
 
 
 			} else{
@@ -67,9 +67,9 @@ export default Service.extend({
 
 	},
 	logout: function(){
-		//console.log('Logging out');
+		console.log('Logging out');
 		var auth = this;
-		$.ajax({url: ENV.host + '/api/session', type: 'DELETE'}).then(
+		$.ajax({url: '/api/session', type: 'DELETE'}).then(
 			function(response){
 				console.log('Logout DELETE Request to /api/session/ was successful:' + response);
 				auth.set('isLoggedIn', false);
@@ -105,12 +105,12 @@ export default Service.extend({
 		}
 
 		//check to see if the user is logged into the API
-		$.get(ENV.host + '/api/session', function(response){
+		$.get('/api/session', function(response){
 			if(response.data.isauthenticated){
 				//success
 			//	console.log('The user: \''+response.username+'\' is currently logged in.');
-				auth.set('username', response.username);
-				auth.set('userid', response.userid);
+				auth.set('username', response.data.username);
+				auth.set('userid', response.data.userid);
 				auth.set('isLoggedIn', true);
 			} else{
 				//errors

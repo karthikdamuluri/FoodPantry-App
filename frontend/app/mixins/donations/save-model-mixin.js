@@ -4,7 +4,7 @@ export default Mixin.create({
   actions: {
     save: function() {
       var route = this;
-      this.currentModel.save().then(function() {
+      this.currentModel.donation.save().then(function() {
         route.transitionTo('donations');
       }, function() {
         console.log('Failed to save the model');

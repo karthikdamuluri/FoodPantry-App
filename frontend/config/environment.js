@@ -1,11 +1,13 @@
 'use strict';
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     // host: 'https://somepantry.com',
     modulePrefix: 'frontend',
-    // environment: environment,
-    rootURL: '/',
+    environment: environment,
+    rootURL: 'static/ember/',
+    routerrooturl: '/',
+    serverName: 'http://localhost',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -25,7 +27,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.host = 'http://localhost:8000';
+    // ENV.host = 'http://localhost:8000';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
