@@ -33,6 +33,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status
 import json, datetime, pytz
 import requests
+import bleach
+
 
 def home(request):
    """
@@ -132,15 +134,15 @@ class InventoryViewSet(viewsets.ModelViewSet):
     serializer_class = InventorySerializer
     permission_classes = (IsAuthenticated,)
 
-
-class Inventory1ViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows Inventories added by volunteers to be CURDed
-    """
-
-    queryset = Inventory.objects.all()
-    serializer_class = Inventory1Serializer
-    permission_classes = (IsAuthenticated,)
+#
+# class Inventory1ViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows Inventories added by volunteers to be CURDed
+#     """
+#
+#     queryset = Inventory.objects.all()
+#     serializer_class = Inventory1Serializer
+#     permission_classes = (IsAuthenticated,)
 
 
 #viewset for Donorss
@@ -148,19 +150,27 @@ class DonorViewSet(viewsets.ModelViewSet):
     """
     API endpoint for the donor details
     """
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     queryset = Donor.objects.all()
     serializer_class = DonorSerializer
 
 
-class Donor1ViewSet(viewsets.ModelViewSet):
+    @action(detail=True, methods=['donation.get'])
+    def trackdonations(self, request, pk):
+        donations = Donation.objects.filter(donor=pk)
+        #return Response({'success': True, 'donations': donations, 'donorpk': pk}, status=status.HTTP_200_OK)
+        return Response({'donations':donations, 'donorpk':pk})
 
-    """
-    API endpoint for the donor details for volunteer
-    """
-    permission_classes = (AllowAny,)
-    queryset = Donor.objects.all()
-    serializer_class = Donor1Serializer
+
+# class Donor1ViewSet(viewsets.ModelViewSet):
+#
+#     """
+#     API endpoint for the donor details for volunteer
+#     """
+#     permission_classes = (AllowAny,)
+#     queryset = Donor.objects.all()
+#     serializer_class = Donor1Serializer
+
 
 
 #viewset for Donations
@@ -168,11 +178,32 @@ class DonationViewSet(viewsets.ModelViewSet):
     """
     API endpoint for the donations to be CURDed
     """
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
     filter_fields = ('id', 'item', 'quantity')
 
+    def create(self, request):
+        admin_or_401(request)
+
+        serializer = foodpantry.DonationSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        admin_or_401(request)
+
+        serializer = foodpantry.DonationSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+
+        return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def itemstotal(self, request, pk=None):
@@ -180,10 +211,7 @@ class DonationViewSet(viewsets.ModelViewSet):
        sumitems = Donation.objects.filter(item=pk).aggregate(quantity__sum=Coalesce(Sum('quantity'),0.0))
        return Response({'success': True, 'sumitems': sumitems}, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=['get'])
-    def trackdonations2(self, request, pk):
-        donations = Donation.objects.filter (donor=pk)
-        return Response({'success': True, 'donations': donations, 'donorpk': pk}, status=status.HTTP_200_OK)
+
 
 
 

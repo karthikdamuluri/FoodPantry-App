@@ -86,8 +86,9 @@ Router.map(function() {
       path: ':donation_id'
     });
   });
-  this.route('login');
   this.route('home');
+  this.route('login');
+
   // this.route('itemstotal');
   this.route('home1');
   // this.route('trackdonations');

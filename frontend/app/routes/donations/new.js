@@ -9,6 +9,6 @@ export default Route.extend(SaveModelMixin, {
     //  inventories: this.store.findRecord('inventory', params.itemname),
       donors: this.store.findAll('donor'),
       donation: this.store.createRecord('donation'),
-    })
+    });
   }
 });

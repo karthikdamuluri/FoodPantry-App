@@ -8,7 +8,7 @@ span.note {
 }
 </style>
 <h2>Volunteer Information in the Organization</h2>
-
+{{#if auth.isLoggedIn}}
 <p>
   <strong>Volunteer number:</strong>
   <span >{{model.volnumber}}</span>
@@ -63,3 +63,4 @@ span.note {
   <strong>Notes/Remarks:</strong>
   <span>{{model.volnotes}}</span>
 </p>
+{{/if}}

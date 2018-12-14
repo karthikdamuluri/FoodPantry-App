@@ -3,15 +3,15 @@
 </p>
 
 <h1>Donation show</h1>
-
+{{#if auth.isLoggedIn}}
 <p>
   <strong>Item:</strong>
-  <span>{{model.item}}</span>
+  <span>{{model.item.itemname}}</span>
 </p>
 
 <p>
   <strong>Donor:</strong>
-  <span>{{model.donor}}</span>
+  <span>{{model.donor.donorname}}</span>
 </p>
 
 <p>
@@ -23,3 +23,4 @@
   <strong>Receiveddate:</strong>
   <span>{{model.receiveddate}}</span>
 </p>
+{{/if}}

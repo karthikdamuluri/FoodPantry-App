@@ -23,8 +23,8 @@
             <tbody>
             {{#each model as |donation|}}
                 <tr>
-                    <td>{{ donation.item }}</td>
-                    <td>{{ donation.donor }}</td>
+                    <td>{{ donation.item.itemname }}</td>
+                    <td>{{ donation.donor.donorname }}</td>
                     <td>{{ donation.quantity }}</td>
                     <td>{{ donation.receiveddate }}</td>
                 </tr>

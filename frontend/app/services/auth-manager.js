@@ -2,11 +2,14 @@ import Service from '@ember/service';
 //import Ember from 'ember';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
-// import ENV from 'frontend/config/environment';
+//import ENV from 'frontend/config/environment';
 
 export default Service.extend({
+	// store: service('store'),
+	// routing: service('-routing'),
 	store: service('store'),
 	routing: service('-routing'),
+
 
 	//field vars
 	username: '',

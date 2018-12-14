@@ -2,8 +2,8 @@
   {{link-to "Donor list" "donors.index" class="button"}}
 </p>
 
-<h1>Donor show</h1>
-
+<h1>Donor Information</h1>
+{{#if auth.isLoggedIn}}
 <p>
   <strong>Donorname:</strong>
   <span>{{model.donorname}}</span>
@@ -23,3 +23,4 @@
   <strong>Notes:</strong>
   <span>{{model.notes}}</span>
 </p>
+{{/if}}

@@ -1,7 +1,8 @@
+
 <p>
   {{link-to "Inventory list" "inventories.index" class="button"}}
 </p>
-
+{{#if auth.isLoggedIn}}
 <h1>Inventory show</h1>
 
 <p>
@@ -18,3 +19,4 @@
   <strong>Createdate:</strong>
   <span>{{model.createdate}}</span>
 </p>
+{{/if}}

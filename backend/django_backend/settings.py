@@ -29,7 +29,7 @@ if ENVIRONMENT == 'PROD':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['137.48.185.230', 'localhost', 'django']
+ALLOWED_HOSTS = ['137.48.255.13', 'localhost', 'django']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_json_api',
+    'sanitizer',
 
 ]
 
